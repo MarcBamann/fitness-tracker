@@ -1,0 +1,16 @@
+.app-container {
+  display: flex;
+  overflow: hidden;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+
+  height: calc(100vh - 5rem);
+  width: calc(200vh - 5rem);
+
+  border-radius: 1.2rem; /* etwas kleiner als außen, damit man den Rahmen sieht */
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}

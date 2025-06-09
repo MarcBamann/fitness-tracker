@@ -1,0 +1,9 @@
+<div class="app-container">
+  <app-sidebar (colorChange)="onColorChange($event)"></app-sidebar>
+
+  <div class="main-content" [style.backgroundColor]="color">
+    <app-main></app-main>
+  </div>
+</div>
+
+<router-outlet />
