@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-my-goals',
-  imports: [
-    NgForOf
-  ],
+  imports: [],
   templateUrl: './my-goals.component.html',
   styleUrl: './my-goals.component.css'
 })
@@ -17,7 +14,4 @@ export class MyGoalsComponent {
     { title: 'Workout Time', current: 25, target: 60, unit: 'min' },
   ];
 
-  editGoal(goal: any) {
-    alert(`Edit feature for ${goal.title} coming soon!`);
-  }
 }

@@ -1,37 +1,31 @@
 .sidebar-card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 220px;
-  height: calc(100vh - 8rem); /* etwas Luft oben/unten */
+  height: calc(100vh - 7rem);
+  padding: 1.5rem 1rem;
 
   background-color: white;
   border-radius: 1.2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-right: 1px solid #e0e0e0;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.04);
 
   position: relative;
   overflow: hidden;
-  margin: 2rem;
 }
 
-/* Linker Farbstreifen – wie bei den Kacheln */
-.sidebar-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    red 0%,
-    orange 16.6%,
-    yellow 33.3%,
-    green 50%,
-    blue 66.6%,
-    violet 83.3%
-  );
-  border-top-left-radius: 1.2rem;
-  border-bottom-left-radius: 1.2rem;
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  padding: 0.5rem;
 }
 
 .user-section {
@@ -41,4 +35,29 @@
 .nav-section {
   flex-grow: 1;
   padding: 1rem;
+}
+
+.sidebar-footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: #666;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto;
+}
+
+.sidebar-footer a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.sidebar-footer a:hover {
+  color: #ff6200;
+}
+
+.separator {
+  color: #999;
 }

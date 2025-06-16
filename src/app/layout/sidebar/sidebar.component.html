@@ -1,9 +1,20 @@
 <div class="sidebar-card">
+  <div class="sidebar-logo">
+    <img src="/MobFit.png" alt="App Logo" />
+  </div>
+
   <div class="user-section">
     <app-user></app-user>
     <hr />
   </div>
+
   <div class="nav-section">
     <app-nav></app-nav>
+  </div>
+
+  <div class="sidebar-footer">
+    <a routerLink="/impressum" routerLinkActive="active">Impressum</a>
+    <span class="separator">|</span>
+    <a routerLink="/datenschutz" routerLinkActive="active">Datenschutz</a>
   </div>
 </div>
