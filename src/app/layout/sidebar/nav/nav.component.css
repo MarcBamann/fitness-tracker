@@ -1,22 +1,30 @@
-.nav-button {
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-menu button {
+  background: none;
+  border: none;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  background-color: white;
-  color: #1a1a1a;
+  font-size: 1rem;
   font-weight: 500;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  color: black;
+  transition: background 0.3s;
 }
 
-.nav-button:hover {
-  background-color: #f0f0f0;
-}
-
-.nav-icon {
+.nav-menu button img {
   width: 20px;
   height: 20px;
+}
+
+.nav-menu button:hover,
+.nav-menu .active {
+  background-color: rgb(255, 98, 0, 0.5);
 }

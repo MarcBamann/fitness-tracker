@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-nav',
-  imports: [],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgOptimizedImage
+  ],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
-export class NavComponent {
-  @Output() colorChange = new EventEmitter<string>();
-
-  changeColor(color: string) {
-    this.colorChange.emit(color);
-  }
-}
+export class NavComponent {}

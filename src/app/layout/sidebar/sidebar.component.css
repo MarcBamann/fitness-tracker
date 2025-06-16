@@ -1,24 +1,37 @@
-.gradient-border {
-  padding: 3px;
-  border-radius: 1.5rem;
-  background: linear-gradient(180deg, rgb(255, 98, 0) 0%, rgb(255, 145, 17) 50%, rgb(255, 195, 89) 100%);
-}
-
-.sidebar-container {
-  position: sticky;
-  top: 0;
-  bottom: 0;
-
+.sidebar-card {
   display: flex;
   flex-direction: column;
-
-  height: calc(100vh - 5rem);
   width: 220px;
+  height: calc(100vh - 8rem); /* etwas Luft oben/unten */
 
-  background-color: white; /* oder ein anderer dunkler Farbton */
-  border-radius: 1.2rem; /* etwas kleiner als außen, damit man den Rahmen sieht */
+  background-color: white;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+  position: relative;
   overflow: hidden;
-  color: white;
+  margin: 2rem;
+}
+
+/* Linker Farbstreifen – wie bei den Kacheln */
+.sidebar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    red 0%,
+    orange 16.6%,
+    yellow 33.3%,
+    green 50%,
+    blue 66.6%,
+    violet 83.3%
+  );
+  border-top-left-radius: 1.2rem;
+  border-bottom-left-radius: 1.2rem;
 }
 
 .user-section {

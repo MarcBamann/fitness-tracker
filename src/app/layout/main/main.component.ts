@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {NgStyle} from '@angular/common';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -7,6 +6,4 @@ import {NgStyle} from '@angular/common';
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent {
-  @Input() color = 'white';
-}
+export class MainComponent {}
