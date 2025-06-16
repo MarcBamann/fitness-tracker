@@ -1,0 +1,31 @@
+<div class="card-wrapper" [ngClass]="wrapperClass">
+  <div class="card-icon-wrapper">
+    <div class="card-icon">
+      <img [src]="icon" alt="{{ title }} Icon" />
+    </div>
+  </div>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="card-title">{{ title }}</span>
+      <span class="card-options">•••</span>
+    </div>
+    <div class="card-data">{{ value }}</div>
+    <div class="card-subtitle">{{ subtitle }}</div>
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        [ngStyle]="{ width: progress + '%', background: progressColor }"
+      ></div>
+    </div>
+    <div class="chart">
+      <svg width="100%" height="50" viewBox="0 0 150 50" preserveAspectRatio="none">
+        <polyline
+          fill="none"
+          [attr.stroke]="chartColor"
+          stroke-width="3"
+          [attr.points]="chartPoints"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
