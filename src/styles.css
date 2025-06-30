@@ -2,3 +2,6 @@
 html {
   background: linear-gradient(135deg, #e495d2, #c3fdfd);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
