@@ -1,114 +1,17 @@
 <div class="health-container">
   <h2 class="page-title">Health</h2>
 
-  <div class="card-grid">
-    <app-health-card
-      title="Steps"
-      icon='/steps.png'
-      value="8,213"
-      subtitle="1h 5m walking"
-      [progress]="65"
-      progressColor="linear-gradient(90deg, #6fcf97, #27ae60)"
-      chartColor="#6fcf97"
-      chartPoints="0,40 20,30 40,35 60,20 80,25 100,15 120,20 150,10"
-      wrapperClass="steps"
-    ></app-health-card>
-
-    <app-health-card
-      title="Calories"
-      icon='/flame.png'
-      value="1,820"
-      subtitle="kcal today"
-      [progress]="72"
-      progressColor="linear-gradient(90deg, #ffc83c, #a30000)"
-      chartColor="#e67e22"
-      chartPoints="0,28 20,32 40,30 60,34 80,29 100,31 120,27 150,33"
-      wrapperClass="calories"
-    ></app-health-card>
-
-    <app-health-card
-      title="Sleep"
-      icon='/sleep.png'
-      value="1h 45m"
-      subtitle="Last night"
-      [progress]="78"
-      progressColor="linear-gradient(90deg, #3e0cc1, #da04ad)"
-      chartColor="#9b59b6"
-      chartPoints="0,30 20,32 40,28 60,34 80,29 100,31 120,27 150,33"
-      wrapperClass="sleep"
-    ></app-health-card>
-
-    <app-health-card
-      title="Gewicht"
-      icon='/scale.png'
-      value="72.5 kg"
-      subtitle="Aktueller Stand"
-      [progress]="68"
-      progressColor="linear-gradient(90deg, #f39c12, #d35400)"
-      chartColor="#e67e22"
-      chartPoints="0,30 20,32 40,30 60,28 80,29 100,27 120,26 150,25"
-      wrapperClass="gewicht"
-    ></app-health-card>
-
-    <app-health-card
-      title="Bier"
-      icon='/water.png'
-      value="4.2 L"
-      subtitle="Today"
-      [progress]="48"
-      progressColor="linear-gradient(90deg, #3498db, #2ecc71)"
-      chartColor="#3498db"
-      chartPoints="0,35 20,30 40,32 60,28 80,30 100,26 120,24 150,22"
-      wrapperClass="water"
-    ></app-health-card>
-
-    <app-health-card
-      title="Stress"
-      icon='/stress.png'
-      value="58%"
-      subtitle="Heute"
-      [progress]="58"
-      progressColor="linear-gradient(90deg, #8e44ad, #c0392b)"
-      chartColor="#c0392b"
-      chartPoints="0,25 20,28 40,26 60,32 80,30 100,35 120,32 150,28"
-      wrapperClass="stress"
-    ></app-health-card>
-
-    <app-health-card
-      title="Herzschlag"
-      icon='/heartbeat.png'
-      value="72 bpm"
-      subtitle="Letzte Messung"
-      [progress]="72"
-      progressColor="linear-gradient(90deg, #e74c3c, #c0392b)"
-      chartColor="#e74c3c"
-      chartPoints="0,30 20,28 40,29 60,27 80,30 100,28 120,31 150,29"
-      wrapperClass="herzschlag"
-    ></app-health-card>
-
-    <app-health-card
-      title="Blutdruck"
-      icon='/bloodpressure.png'
-      value="120/80"
-      subtitle="Letzte Messung"
-      [progress]="60"
-      progressColor="linear-gradient(90deg, #2980b9, #27ae60)"
-      chartColor="#2980b9"
-      chartPoints="0,35 20,32 40,30 60,28 80,31 100,30 120,29 150,28"
-      wrapperClass="blutdruck"
-    ></app-health-card>
-
-    <app-health-card
-      title="Blutzucker"
-      icon='/blood-sugar.png'
-      value="95 mg/dL"
-      subtitle="Heute"
-      [progress]="50"
-      progressColor="linear-gradient(90deg, #16a085, #1abc9c)"
-      chartColor="#1abc9c"
-      chartPoints="0,33 20,30 40,32 60,29 80,28 100,30 120,27 150,25"
-      wrapperClass="blutzucker"
-    ></app-health-card>
-
-  </div>
+    <div class="card-grid">
+      <app-health-card
+        *ngFor="let card of cards"
+        [title]="card.title"
+        [icon]="card.icon"
+        [value]="getValue(card.title)"
+        [subtitle]="card.subtitle"
+        [chartColor]="card.chartColor"
+        [chartPoints]="getSvgPoints(card.title)"
+        [wrapperClass]="card.wrapperClass"
+        (edit)="openEditDialog(card.title)"
+      ></app-health-card>
+    </div>
 </div>
