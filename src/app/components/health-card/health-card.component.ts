@@ -17,8 +17,9 @@ export class HealthCardComponent {
   @Input() progress!: number;
   @Input() progressColor!: string;
   @Input() chartColor!: string;
-  @Input() chartPoints!: string;
+  @Input() chartPoints: string = '';
   @Input() wrapperClass: string = '';
 
   @Output() edit = new EventEmitter<void>();
+
 }

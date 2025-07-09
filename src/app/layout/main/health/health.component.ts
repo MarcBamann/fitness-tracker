@@ -80,40 +80,59 @@ export class HealthComponent {
     private storage: HealthStorageService
   ) {}
 
+  // Wert für die aktuelle Tagesanzeige holen
   getValue(category: string): string {
-    const entry = this.storage.getEntry(category, this.getToday());
-    return entry?.value ?? '-';
+    const entry = this.storage.getValue(category, new Date());
+    return entry !== null ? entry.toString() : '-';
   }
 
-  getChartPoints(category: string): string {
-    const entries = this.storage.getLast7Days(category);
-    const numbers = entries.map(e => this.parseValue(e.value));
-    return formatChartData(numbers);
+  // Werte der letzten 7 Tage holen für Chart
+  getChartPoints(category: string): number[] {
+    const points: number[] = [];
+    const today = new Date();
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      const value = this.storage.getValue(category, date);
+      points.push(value ?? 0);
+    }
+
+    return points;
   }
 
+  getSvgPoints(category: string): string {
+    const values = this.getChartPoints(category);
+    const max = Math.max(...values, 1);
+    const pointCount = values.length;
+
+    return values
+      .map((v, i) => {
+        const x = (i / (pointCount - 1)) * 150; // x-Koordinate (Breite)
+        const y = 50 - (v / max) * 50;           // y-Koordinate (Höhe), invertiert da SVG y=0 oben ist
+        return `${x.toFixed(2)},${y.toFixed(2)}`;
+      })
+      .join(' ');
+  }
+
+  // Dialog öffnen zum Bearbeiten des Werts
   openEditDialog(category: string) {
     const dialogRef = this.dialog.open(HealthValueDialogComponent, {
       width: '300px',
-      data: { category }
+      data: {
+        category,
+        value: this.storage.getValue(category, new Date()),
+        date: new Date(),
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.storage.saveEntry(category, {
-          date: this.getToday(),
-          value: result
-        });
+      if (result) {
+        this.storage.saveValue(result.category, result.value, result.date);
+
+        // Trigger zum Neurendern
+        this.cards = [...this.cards];
       }
     });
-  }
-
-  private getToday(): string {
-    return new Date().toISOString().split('T')[0];
-  }
-
-  private parseValue(value: string): number {
-    const cleaned = value.replace(/[^\d.]/g, '');
-    const num = parseFloat(cleaned);
-    return isNaN(num) ? 0 : num;
   }
 }

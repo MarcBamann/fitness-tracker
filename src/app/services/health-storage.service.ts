@@ -1,44 +1,56 @@
 import { Injectable } from '@angular/core';
-import { HealthData, HealthEntry } from '../models/health-data.model';
+
+interface HealthData {
+  [category: string]: {
+    [date: string]: number; // z.B. "2025-07-09": 123
+  };
+}
 
 @Injectable({ providedIn: 'root' })
 export class HealthStorageService {
-  private readonly STORAGE_KEY = 'health-data';
+  private STORAGE_KEY = 'health-data';
 
-  getHealthData(): HealthData {
-    const data = localStorage.getItem(this.STORAGE_KEY);
-    return data ? JSON.parse(data) : {};
+  constructor() {}
+
+  // Hilfsfunktion: Datum als String formatieren: "YYYY-MM-DD"
+  private formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
   }
 
-  saveEntry(category: string, entry: HealthEntry): void {
-    const data = this.getHealthData();
-    if (!data[category]) {
-      data[category] = [];
-    }
+  // Gesamte Daten aus LocalStorage holen
+  getAllData(): HealthData {
+    const raw = localStorage.getItem(this.STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  }
 
-    const index = data[category].findIndex(e => e.date === entry.date);
-    if (index >= 0) {
-      data[category][index] = entry;
-    } else {
-      data[category].push(entry);
+  // Einzelnen Wert lesen (Kategorie + Datum)
+  getValue(category: string, date: Date): number | null {
+    const data = this.getAllData();
+    const dateKey = this.formatDate(date);
+    return data[category]?.[dateKey] ?? null;
+  }
+
+  // Einzelnen Wert speichern / überschreiben
+  saveValue(category: string, value: number, date: Date): void {
+    const data = this.getAllData();
+    const dateKey = this.formatDate(date);
+
+    if (!data[category]) {
+      data[category] = {};
     }
+    data[category][dateKey] = value;
 
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
   }
 
-  getEntry(category: string, date: string): HealthEntry | undefined {
-    return this.getHealthData()[category]?.find(e => e.date === date);
-  }
+  // Optional: Einen ganzen Eintrag löschen
+  deleteValue(category: string, date: Date): void {
+    const data = this.getAllData();
+    const dateKey = this.formatDate(date);
 
-  getLast7Days(category: string): HealthEntry[] {
-    const today = new Date();
-    const data = this.getHealthData()[category] || [];
-
-    return [...Array(7)].map((_, i) => {
-      const d = new Date(today);
-      d.setDate(today.getDate() - i);
-      const dateStr = d.toISOString().split('T')[0];
-      return data.find(e => e.date === dateStr) || { date: dateStr, value: '-' };
-    }).reverse();
+    if (data[category] && data[category][dateKey]) {
+      delete data[category][dateKey];
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    }
   }
 }
