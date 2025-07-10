@@ -1,64 +1,35 @@
 <div class="goal-wrapper">
-  <!-- Cycling Card -->
-  <div class="goal-card accent-cycling">
-    <div class="goal-card-content">
-      <div class="edit-icon">✏️</div>
-      <h3 class="goal-title">Cycling</h3>
-      <p class="goal-target">🎯 Goal: 50 km / week</p>
-
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 68%"></div>
-        </div>
-        <p class="progress-text">68%</p>
-      </div>
-
-      <div class="goal-info">
-        <span class="trend-up">▲ +12%</span>
-        <span class="status on-track">🟢 Geb dir mal etwas Mühe</span>
-      </div>
+  <div
+    class="goal-card"
+    *ngFor="let goal of goals"
+    [ngClass]="'accent-' + goal.icon"
+  >
+    <div class="goal-header">
+      <mat-icon class="goal-icon">{{ goal.icon }}</mat-icon>
+      <button mat-icon-button (click)="openEditDialog(goal)">
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
-  </div>
 
-  <!-- Jogging Card -->
-  <div class="goal-card accent-jogging">
-    <div class="goal-card-content">
-      <div class="edit-icon">✏️</div>
-      <h3 class="goal-title">Jogging</h3>
-      <p class="goal-target">🎯 Goal: 20 km / week</p>
+    <h3 class="goal-title">{{ goal.title }}</h3>
+    <p class="goal-target">🎯 Ziel: {{ goal.targetValue }} {{ goal.unit }}</p>
+    <p>Aktueller Fortschritt: {{ goal.currentValue ?? 0 }} {{ goal.unit }}</p>
+    <p class="goal-deadline">📅 Bis: {{ goal.deadline | date: 'dd.MM.yyyy' }}</p>
 
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 40%"></div>
-        </div>
-        <p class="progress-text">40%</p>
+    <div class="progress-bar-container">
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="calculateProgress(goal)"
+        ></div>
       </div>
-
-      <div class="goal-info">
-        <span class="trend-down">▼ -5%</span>
-        <span class="status behind">🔴 Beweg dich du fette Sau!</span>
-      </div>
+      <p class="progress-text">{{ calculateProgress(goal) }}%</p>
     </div>
-  </div>
 
-  <!-- Workout Card -->
-  <div class="goal-card accent-workout">
-    <div class="goal-card-content">
-      <div class="edit-icon">✏️</div>
-      <h3 class="goal-title">Workout</h3>
-      <p class="goal-target">🎯 Goal: 4 Sessions / week</p>
-
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 100%"></div>
-        </div>
-        <p class="progress-text">100%</p>
-      </div>
-
-      <div class="goal-info">
-        <span class="trend-neutral">— 0%</span>
-        <span class="status completed">✅ Fertig! Das hat aber echt gedauert</span>
-      </div>
+    <div class="goal-info">
+      <span class="status" [ngClass]="getStatusClass(goal)">
+        {{ getStatusText(goal) }}
+      </span>
     </div>
   </div>
 </div>

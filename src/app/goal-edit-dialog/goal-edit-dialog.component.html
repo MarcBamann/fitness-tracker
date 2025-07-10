@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Ziel bearbeiten</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Titel</mat-label>
+    <input matInput [(ngModel)]="data.goal.title">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Zielwert</mat-label>
+    <input matInput type="number" [(ngModel)]="data.goal.targetValue">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Einheit</mat-label>
+    <input matInput [(ngModel)]="data.goal.unit">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Deadline</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.goal.deadline">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Fortschritt</mat-label>
+    <input matInput type="number" [(ngModel)]="data.goal.currentValue">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Abbrechen</button>
+  <button mat-raised-button color="primary" (click)="save()">Speichern</button>
+</mat-dialog-actions>
