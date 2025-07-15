@@ -1,55 +1,90 @@
-.goals-grid {
+.card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-}
-
-.goal-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  padding: 16px;
+  gap: 2rem;
+  padding: 1rem;
 }
 
 .goal-card {
   background: #fff;
   border-radius: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 1.5rem;
-  position: relative;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 280px;
+  position: relative;
+}
+
+.goal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
 }
 
 .goal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.2rem;
 }
 
 .goal-icon {
-  font-size: 2.5rem;
-  color: #478ed1;
+  font-size: 2.4rem;
+  color: #555;
+  background: #f3f3f3;
+  border-radius: 1rem;
+  padding: 0.6rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.goal-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+.goal-target,
+.goal-deadline {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0.1rem 0;
 }
 
 .progress-bar {
-  height: 12px;
-  background-color: #eee;
-  border-radius: 6px;
+  height: 10px;
+  background-color: #e6e6e6;
+  border-radius: 8px;
   overflow: hidden;
+  margin: 1.2rem 0 0.5rem;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(to right, #42a5f5, #478ed1);
-  transition: width 0.3s ease;
+  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  width: 0;
+  transition: width 0.5s ease-in-out;
 }
 
-.motivation {
-  font-size: 0.9rem;
-  font-style: italic;
+.goal-progress-value {
+  font-size: 1.2rem;
+  font-weight: 500;
   color: #444;
-  margin-top: 0.5rem;
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
+.motivational-text {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 1rem;
+  font-style: italic;
+  text-align: center;
 }

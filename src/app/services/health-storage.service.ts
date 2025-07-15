@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 interface HealthData {
   [category: string]: {
-    [date: string]: number; // z.B. "2025-07-09": 123
+    [date: string]: number;
   };
 }
 
@@ -41,16 +41,5 @@ export class HealthStorageService {
     data[category][dateKey] = value;
 
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
-  }
-
-  // Optional: Einen ganzen Eintrag löschen
-  deleteValue(category: string, date: Date): void {
-    const data = this.getAllData();
-    const dateKey = this.formatDate(date);
-
-    if (data[category] && data[category][dateKey]) {
-      delete data[category][dateKey];
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
-    }
   }
 }

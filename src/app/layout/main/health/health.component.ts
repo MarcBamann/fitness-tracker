@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {formatChartData} from '../../../utils/chart-utils';
 import {HealthStorageService} from '../../../services/health-storage.service';
 import {HealthCardComponent} from '../../../components/health-card/health-card.component';
 import {HealthValueDialogComponent} from '../../../components/health-value-dialog/health-value-dialog.component';
@@ -18,16 +17,16 @@ import {NgForOf} from '@angular/common';
 export class HealthComponent {
   cards = [
     {
-      title: 'Calories',
+      title: 'Kalorien',
       icon: '/flame.png',
-      subtitle: 'kcal today',
+      subtitle: 'kcal heute',
       wrapperClass: 'calories',
       chartColor: '#e67e22'
     },
     {
-      title: 'Sleep',
+      title: 'Schlaf',
       icon: '/sleep.png',
-      subtitle: 'Last night',
+      subtitle: 'letzte Nacht',
       wrapperClass: 'sleep',
       chartColor: '#9b59b6'
     },
@@ -41,7 +40,7 @@ export class HealthComponent {
     {
       title: 'Bier',
       icon: '/water.png',
-      subtitle: 'Today',
+      subtitle: 'Heute',
       wrapperClass: 'water',
       chartColor: '#3498db'
     },
@@ -86,7 +85,7 @@ export class HealthComponent {
     return entry !== null ? entry.toString() : '-';
   }
 
-  // Werte der letzten 7 Tage holen für Chart
+  // Werte der letzten 7 Tage
   getChartPoints(category: string): number[] {
     const points: number[] = [];
     const today = new Date();
@@ -108,8 +107,8 @@ export class HealthComponent {
 
     return values
       .map((v, i) => {
-        const x = (i / (pointCount - 1)) * 150; // x-Koordinate (Breite)
-        const y = 50 - (v / max) * 50;           // y-Koordinate (Höhe), invertiert da SVG y=0 oben ist
+        const x = (i / (pointCount - 1)) * 150;
+        const y = 50 - (v / max) * 50;
         return `${x.toFixed(2)},${y.toFixed(2)}`;
       })
       .join(' ');
@@ -129,8 +128,6 @@ export class HealthComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.storage.saveValue(result.category, result.value, result.date);
-
-        // Trigger zum Neurendern
         this.cards = [...this.cards];
       }
     });
