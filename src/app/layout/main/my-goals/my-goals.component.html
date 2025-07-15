@@ -1,9 +1,5 @@
-<div class="goal-wrapper">
-  <div
-    class="goal-card"
-    *ngFor="let goal of goals"
-    [ngClass]="'accent-' + goal.icon"
-  >
+<div class="card-grid">
+  <div class="goal-card" *ngFor="let goal of goals">
     <div class="goal-header">
       <mat-icon class="goal-icon">{{ goal.icon }}</mat-icon>
       <button mat-icon-button (click)="openEditDialog(goal)">
@@ -12,24 +8,16 @@
     </div>
 
     <h3 class="goal-title">{{ goal.title }}</h3>
-    <p class="goal-target">🎯 Ziel: {{ goal.targetValue }} {{ goal.unit }}</p>
-    <p>Aktueller Fortschritt: {{ goal.currentValue ?? 0 }} {{ goal.unit }}</p>
-    <p class="goal-deadline">📅 Bis: {{ goal.deadline | date: 'dd.MM.yyyy' }}</p>
+    <p class="goal-target"><b>Ziel:</b> {{ goal.targetValue }} {{ goal.unit }}</p>
+    <p class="goal-deadline"><b>Bis:</b> {{ goal.deadline | date: 'dd.MM.yyyy' }}</p>
 
-    <div class="progress-bar-container">
-      <div class="progress-bar">
-        <div
-          class="progress-fill"
-          [style.width.%]="calculateProgress(goal)"
-        ></div>
-      </div>
-      <p class="progress-text">{{ calculateProgress(goal) }}%</p>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="calculateProgress(goal)"></div>
+    </div>
+    <div class="goal-progress-value">
+      {{ goal.currentValue || 0 }} / {{ goal.targetValue }} {{ goal.unit }}
     </div>
 
-    <div class="goal-info">
-      <span class="status" [ngClass]="getStatusClass(goal)">
-        {{ getStatusText(goal) }}
-      </span>
-    </div>
+    <p class="motivational-text">{{ getMotivationalText(goal) }}</p>
   </div>
 </div>

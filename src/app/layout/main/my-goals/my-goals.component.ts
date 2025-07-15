@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, DecimalPipe, NgClass, NgForOf} from '@angular/common';
+import {DatePipe, NgForOf} from '@angular/common';
 import {MatDialog} from '@angular/material/dialog';
-import {GoalEditDialogComponent} from '../../../goal-edit-dialog/goal-edit-dialog.component';
+import {GoalEditDialogComponent} from '../../../components/goal-edit-dialog/goal-edit-dialog.component';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 
@@ -21,7 +21,6 @@ export interface Goal {
 @Component({
   selector: 'app-my-goals',
   imports: [
-    NgClass,
     NgForOf,
     DatePipe,
     MatIcon,
@@ -98,10 +97,9 @@ export class MyGoalsComponent implements OnInit {
   }
 
   calculateProgress(goal: Goal): number {
-    const done = goal.currentValue ?? 0;  // Aktueller Wert, den du eingibst
-    const total = goal.targetValue;
-
-    return total > 0 ? Math.min(Math.round((done / total) * 100), 100) : 0;
+    const progress = goal.currentValue || 0;
+    const target = goal.targetValue || 1;
+    return Math.min(Math.round((progress / target) * 100), 100);
   }
 
   saveGoal(updatedGoal: Goal) {
@@ -112,34 +110,14 @@ export class MyGoalsComponent implements OnInit {
     }
   }
 
-  calculateCurrentValue(goal: Goal): number {
-    if (goal.dailyProgress) {
-      return Object.values(goal.dailyProgress).reduce((sum, val) => sum + val, 0);
-    }
-    return goal.currentValue ?? 0;
-  }
-
   getMotivationalText(goal: Goal): string {
     const progress = this.calculateProgress(goal);
-    if (progress >= 100) return '✅ Ziel erreicht! Super!';
-    if (progress >= 75) return '💪 Fast am Ziel, dranbleiben!';
-    if (progress >= 40) return '👍 Guter Start!';
-    return '🏃‍♂️ Los geht’s!';
-  }
 
-  getStatusClass(goal: Goal): string {
-    const progress = this.calculateProgress(goal);
-    if (progress >= 100) return 'completed';
-    if (progress >= 40) return 'on-track';
-    return 'behind';
+    if (progress === 0) return 'Los du faule Sau!';
+    if (progress < 25) return 'Da ist meine Oma ja schneller!';
+    if (progress < 50) return 'Wie faul bist du eigentlich?';
+    if (progress < 75) return 'Das geht aber viel besser';
+    if (progress < 100) return 'Jetzt mach mal hinne';
+    return 'Ziel erreicht - Nächstes mal schneller!';
   }
-
-  getStatusText(goal: Goal): string {
-    const progress = this.calculateProgress(goal);
-    if (progress >= 100) return '✅ Ziel erreicht!';
-    if (progress >= 75) return '👍 Fast geschafft!';
-    if (progress >= 40) return '🟢 Dranbleiben!';
-    return '🔴 Los geht\'s!';
-  }
-
 }

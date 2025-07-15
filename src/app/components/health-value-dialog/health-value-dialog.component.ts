@@ -18,12 +18,6 @@ import {
 import {MatNativeDateModule} from '@angular/material/core';
 import {HealthStorageService} from '../../services/health-storage.service';
 
-export interface HealthDialogData {
-  category: string;
-  value: number;
-  date: Date; // NEU: Datum
-}
-
 @Component({
   selector: 'app-health-value-dialog',
   templateUrl: './health-value-dialog.component.html',
