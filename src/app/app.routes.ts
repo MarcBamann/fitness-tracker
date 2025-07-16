@@ -5,10 +5,12 @@ import {DatenschutzComponent} from './layout/main/datenschutz/datenschutz.compon
 import {ImpressumComponent} from './layout/main/impressum/impressum.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+ /* { path: '', redirectTo: 'home', pathMatch: 'full' }, */
+  { path: '', redirectTo: 'my-goals', pathMatch: 'full' },
   { path: 'my-goals', component: MyGoalsComponent },
   { path: 'health', component: HealthComponent },
   { path: 'impressum', component: ImpressumComponent },
   { path: 'datenschutz', component: DatenschutzComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'my-goals' }
+ /* { path: '**', redirectTo: 'home' }*/
 ];
