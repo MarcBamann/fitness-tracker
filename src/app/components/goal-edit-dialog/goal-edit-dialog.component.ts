@@ -6,7 +6,7 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
-import { Goal } from 'C:/Users/marcb/WebstormProjects/fitness-tracker/src/app/layout/main/my-goals/my-goals.component';
+import { Goal } from '../../layout/main/my-goals/my-goals.component';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
